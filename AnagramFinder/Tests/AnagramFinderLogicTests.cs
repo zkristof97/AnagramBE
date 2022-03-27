@@ -61,5 +61,16 @@ namespace Tests
 
             _service.GetAnagramsByWord(searchTerm);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(SearchTermTooLongException))]
+        public void GetAnagramsByWord_Should_Throw_SearchTerm_Too_Long_Exception()
+        {
+            string searchTerm = "veeeeeeeeeeeeeryLongWord";
+
+            _repoMock.Setup(x => x.GetAll()).Returns(new List<string>());
+
+            _service.GetAnagramsByWord(searchTerm);
+        }
     }
 }

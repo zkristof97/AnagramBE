@@ -21,6 +21,11 @@ namespace Logic.implementations
                 throw new NoSearchTermException("Word to search for is not provided.");
             }
 
+            if(searchTerm.Length > 5)
+            {
+                throw new SearchTermTooLongException("Sought word is too long.");
+            }
+
             var words = (List<string>)_wordRepository.GetAll();
 
             var anagrams = words.FindAll(word =>
@@ -69,6 +74,14 @@ public class NoMatchException : Exception
 public class NoSearchTermException : Exception
 {
     public NoSearchTermException(string message) : base(message)
+    {
+
+    }
+}
+
+public class SearchTermTooLongException : Exception
+{
+    public SearchTermTooLongException(string message) : base(message)
     {
 
     }
