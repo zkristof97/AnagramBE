@@ -18,7 +18,7 @@ namespace Logic.implementations
         {
             if(string.IsNullOrWhiteSpace(searchTerm))
             {
-                throw new Exception("Word to search for is not provided.");
+                throw new NoSearchTermException("Word to search for is not provided.");
             }
 
             var words = (List<string>)_wordRepository.GetAll();
@@ -37,7 +37,7 @@ namespace Logic.implementations
 
             if(anagrams.Count == 0)
             {
-                throw new Exception("No match for the search criteria.");
+                throw new NoMatchException("No match for the search criteria.");
             }
 
             return anagrams;
@@ -55,5 +55,21 @@ namespace Logic.implementations
 
             return (new string(chars));
         }
+    }
+}
+
+public class NoMatchException : Exception
+{
+    public NoMatchException(string message): base(message)
+    {
+
+    }
+}
+
+public class NoSearchTermException : Exception
+{
+    public NoSearchTermException(string message) : base(message)
+    {
+
     }
 }
